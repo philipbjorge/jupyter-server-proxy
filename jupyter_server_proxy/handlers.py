@@ -287,7 +287,7 @@ class ProxyHandler(WebSocketHandlerMixin, JupyterHandler):
             headers['X-Forwarded-Prefix'] = context_path
 
         req = httpclient.HTTPRequest(
-            client_uri, method=self.request.method, body=body,
+            client_uri, method=self.request.method, body=body, allow_nonstandard_methods=True,
             decompress_response=False,
             headers=headers, **self.proxy_request_options())
         return req
@@ -341,7 +341,7 @@ class ProxyHandler(WebSocketHandlerMixin, JupyterHandler):
 
         body = self.request.body
         if not body:
-            if self.request.method in  {'POST', 'PUT', 'DELETE'}:
+            if self.request.method in  {'POST', 'PUT'}:
                 body = b''
             else:
                 body = None
