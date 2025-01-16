@@ -341,7 +341,7 @@ class ProxyHandler(WebSocketHandlerMixin, JupyterHandler):
 
         body = self.request.body
         if not body:
-            if self.request.method in  {'POST', 'PUT'}:
+            if self.request.method in  {'POST', 'PUT', 'DELETE'}:
                 body = b''
             else:
                 body = None
